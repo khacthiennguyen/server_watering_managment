@@ -15,6 +15,7 @@ const createSensor = async (req, res) => {
     time: moment().format("LT"), //21:07
     moisture: req.body.moisture,
     location: req.body.location,
+    activate:true,
   });
   // Save đối tượng cảm biến đó vào trong db
   sensor
