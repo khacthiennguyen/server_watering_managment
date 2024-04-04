@@ -21,6 +21,10 @@ const mongoose = require("mongoose")
     location:{
         type:String,
         required: [true],
+    },
+    activate:{
+        type:String,
+        required: [true],
     }
 
  },{timestamps:true})
