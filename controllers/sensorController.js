@@ -1,5 +1,4 @@
-const moment = require("moment");
-moment.locale("vi");
+const moment = require('moment-timezone');
 const sensorModel = require("../models/sensorModel");
 
 // create sensor
@@ -9,10 +8,11 @@ const createSensor = async (req, res) => {
     return;
   }
   //create
+  const vietnamTime = moment().tz('Asia/Ho_Chi_Minh'); // Lấy thời gian hiện tại theo múi giờ Việt Nam
   const sensor = new sensorModel({
     sensorId: req.body.sensorId,
-    day: moment().format("L"), //11/04/2023
-    time: moment().format("LT"), //21:07
+    day: vietnamTime.format("L"), //11/04/2023
+    time: vietnamTime.format("LT"), //21:07
     moisture: req.body.moisture,
     location: req.body.location,
     activate : true,
