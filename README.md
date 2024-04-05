@@ -1,1 +1,2 @@
-# Server Watering managment ioT projetc with MVC, resAPI
+# Server for ioT project Watering Managment App use MVC, resAPI
+
