@@ -20,12 +20,12 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //routes
-// app.get('/',(req,res) => {
-//     res.status(200).json({
-//         success:true,
-//         message:"wellcome to app watering app"
-//     })
-// })
+app.get('/',(req,res) => {
+res.status(200).json({
+      success:true,
+    message:"wellcome to app watering app"
+})
+})
 app.use('/api/v1/auth',require('./routes/userRoutes'))
 app.use('/api/v1/sensor',require('./routes/sensorRoute'))
 
