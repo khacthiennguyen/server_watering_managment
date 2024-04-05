@@ -22,10 +22,17 @@ const mongoose = require("mongoose")
         type:String,
         required: [true],
     },
+<<<<<<< HEAD
     activate:{
         type:String,
         required: [true],
     }
+=======
+  activate:{
+   type:String,
+        required: [true],
+  }
+>>>>>>> 4b9b9a368a58a4a7e8f75e5f360720e76a1b7f67
 
  },{timestamps:true})
 
