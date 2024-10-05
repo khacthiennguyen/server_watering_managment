@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const sensorSchema = new mongoose.Schema(
   {
     sensorId: {
@@ -6,7 +7,7 @@ const sensorSchema = new mongoose.Schema(
       required: [true],
     },
     day: {
-      type: String,
+      type: Date,
       required: [true],
     },
     time: {

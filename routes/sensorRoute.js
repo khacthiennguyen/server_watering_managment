@@ -9,6 +9,7 @@ const {
   enableAutoWater,
   watering,
   stopWatering,
+  getAnalystic,
 } = require("../controllers/sensorController");
 
 //routes object
@@ -17,6 +18,7 @@ const router = express.Router();
 //routes
 router.get("/getAll", getAllSensor);
 router.get("/getallUnique", getAllUniqueSensors);
+router.get("/getAnalystic", getAnalystic);
 
 router.post("/create", createSensor);
 

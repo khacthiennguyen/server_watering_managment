@@ -2,13 +2,17 @@ const moment = require("moment-timezone");
 const sensorModel = require("../models/sensorModel");
 const SensorSocketService = require("../services/sensorService").default;
 
+//create
+// Lấy thời gian hiện tại theo múi giờ Việt Nam
+const vietnamTime = moment().tz("Asia/Ho_Chi_Minh"); 
+
 // create sensor
 const createSensor = async (req, res) => {
   if (!req.body.sensorId || !req.body.moisture || !req.body.location) {
     res.status(400).send({ message: "Please add moisture and location !" });
     return;
   }
-  //create
+  // //create
   const vietnamTime = moment().tz("Asia/Ho_Chi_Minh"); // Lấy thời gian hiện tại theo múi giờ Việt Nam
   const sensor = new sensorModel({
     sensorId: req.body.sensorId,
@@ -52,6 +56,36 @@ const getAllSensor = async (req, res) => {
         message: err.message || "Error with Find Sensor API",
       });
     });
+};
+
+const getAnalystic = async (req, res) => {
+  try {
+    const { frequency } = req.query;
+    const startDate = moment(vietnamTime)
+      .subtract(Number(frequency), "d")
+      .toDate(); // Format ngày
+
+      // $gte: dayjs().subtract(Number(frequency),'d').toDate(),
+
+    const data = await sensorModel.find({
+      day: { $gte: startDate },
+    });
+
+    res.status(200).send({
+      success: true,
+      message: "Find analyst data successful",
+      data: data,
+      // endate: endDate,
+      startDate: startDate,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to find analyst data",
+      error: error,
+    });
+  }
 };
 
 const getAllUniqueSensors = async (req, res) => {
@@ -241,6 +275,7 @@ const stopWatering = async (req, res) => {
 module.exports = {
   createSensor,
   getAllSensor,
+  getAnalystic,
   getAllUniqueSensors,
   deActivateSensor,
   activateSensor,
